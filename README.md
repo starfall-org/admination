@@ -19,7 +19,7 @@ A modern web application to connect and explore databases visually with full CRU
 
 ```bash
 # Clone repository
-git clone <repository-url>
+git clone https://github.com/starfall-org/admination
 
 # Install dependencies
 npm install
