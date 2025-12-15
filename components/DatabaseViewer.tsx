@@ -39,7 +39,7 @@ export default function DatabaseViewer() {
                 <Database className="text-white" size={20} />
               </div>
               <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
-                {t('databaseVisualizer')}
+                {t('admination')}
               </h1>
             </div>
             <div className="flex items-center space-x-4">

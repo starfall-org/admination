@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Database Visualizer",
+  title: "admination",
   description: "Connect and explore your databases with ease",
 };
 

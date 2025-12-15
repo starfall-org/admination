@@ -1,4 +1,4 @@
-# Database Visualizer
+# admination
 
 A modern web application to connect and explore databases visually with full CRUD capabilities.
 

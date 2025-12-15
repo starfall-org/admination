@@ -4,7 +4,7 @@ export type Language = 'vi' | 'en';
 
 export interface Translations {
   // Header
-  databaseVisualizer: string;
+  admination: string;
   
   // Login
   connectDatabase: string;
@@ -139,7 +139,7 @@ interface I18nStore {
 
 const translations: Record<Language, Translations> = {
   vi: {
-    databaseVisualizer: 'Database Visualizer',
+    admination: 'admination',
     connectDatabase: 'Kết nối Database',
     databaseUrl: 'Database URL',
     databaseType: 'Loại Database',
@@ -239,7 +239,7 @@ const translations: Record<Language, Translations> = {
     rowsAffected: 'dòng bị ảnh hưởng'
   },
   en: {
-    databaseVisualizer: 'Database Visualizer',
+    admination: 'admination',
     connectDatabase: 'Connect Database',
     databaseUrl: 'Database URL',
     databaseType: 'Database Type',
