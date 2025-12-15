@@ -1,45 +1,76 @@
 # Database Visualizer
 
-Một ứng dụng web hiện đại để kết nối và khám phá database một cách trực quan.
+A modern web application to connect and explore databases visually with full CRUD capabilities.
 
-## ✨ Tính năng
+## ✨ Features
 
-- 🔗 **Kết nối đa database**: Hỗ trợ PostgreSQL, MySQL và Turso
-- 🌐 **Đa ngôn ngữ**: Tiếng Việt và tiếng Anh
-- 📊 **Visualization**: Hiển thị bảng và dữ liệu một cách trực quan
-- 🎨 **Giao diện hiện đại**: Dark mode và responsive design
-- ⚡ **Hiệu suất cao**: Built với Next.js và TypeScript
+- 🔗 **Multi-Database Connection**: Support for PostgreSQL, MySQL, and Turso
+- 🌐 **Multi-Language**: Vietnamese and English
+- 📊 **Visualization**: Display tables and data visually
+- ✏️ **Full CRUD Operations**: Create, Read, Update, Delete data directly in the interface
+- 🔄 **Inline Editing**: Edit data directly in table cells with instant feedback
+- ➕ **Add New Rows**: Add new records to any table
+- 🗑️ **Delete Records**: Remove data with confirmation
+- 💾 **Session Persistence**: Automatic login session caching
+- 🎨 **Modern Interface**: Dark mode and responsive design
+- ⚡ **High Performance**: Built with Next.js and TypeScript
 
-## 🚀 Cài đặt
+## 🚀 Installation
 
 ```bash
 # Clone repository
 git clone <repository-url>
 
-# Cài đặt dependencies
+# Install dependencies
 npm install
 
-# Chạy development server
+# Run development server
 npm run dev
 ```
 
-## 🛠️ Công nghệ sử dụng
+## 🛠️ Technologies Used
 
-- **Framework**: Next.js 16 với App Router
+- **Framework**: Next.js 16 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: Zustand
 - **Icons**: Lucide React
 - **Database Support**: PostgreSQL, MySQL, Turso
 
-## 📱 Sử dụng
+## 📱 Usage
 
-1. **Kết nối Database**: Nhập URL database của bạn
-2. **Chọn loại Database**: PostgreSQL, MySQL hoặc Turso
-3. **Khám phá dữ liệu**: Chọn bảng từ danh sách để xem dữ liệu
-4. **Chuyển đổi ngôn ngữ**: Sử dụng selector ngôn ngữ ở góc trên
+### Basic Operations
+1. **Connect Database**: Enter your database URL and select database type
+2. **Browse Tables**: Select tables from the sidebar to view data
+3. **View Data**: Browse through table contents in a clean, organized format
 
-## 🗄️ Hỗ trợ Database
+### Data Editing
+1. **Edit Existing Data**:
+   - Click on any cell to start editing
+   - Press Enter to save or Escape to cancel
+   - Use the action buttons for more complex operations
+
+2. **Add New Records**:
+   - Click the "Thêm dòng" button in the table header
+   - Fill in the new row data
+   - Save or cancel as needed
+
+3. **Delete Records**:
+   - Click the "Xóa" button in the row actions
+   - Confirm deletion in the popup dialog
+
+4. **Row Actions**:
+   - **Sửa**: Start editing the row
+   - **Lưu**: Save changes (when editing)
+   - **Hủy**: Cancel editing (when editing)
+   - **Xóa**: Delete the record
+
+### Session Management
+- **Auto-save**: Login sessions are automatically cached
+- **Persistent State**: Table selections and data are remembered
+- **Clear Session**: Disconnect to clear all cached data
+
+## 🗄️ Database Support
 
 ### PostgreSQL
 ```
@@ -56,32 +87,46 @@ mysql://username:password@localhost:3306/database_name
 libsql://username:password@your-db.turso.io
 ```
 
-## 📦 Cấu trúc dự án
+## 📦 Project Structure
 
 ```
 ├── app/
 │   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Trang chủ
+│   └── page.tsx            # Home page
 ├── components/
-│   ├── DatabaseViewer.tsx  # Giao diện chính
-│   ├── LoginForm.tsx       # Form đăng nhập
-│   ├── TableList.tsx       # Danh sách bảng
-│   ├── DataTable.tsx       # Hiển thị dữ liệu bảng
-│   ├── ConnectionInfo.tsx  # Thông tin kết nối
-│   └── LanguageSelector.tsx # Chọn ngôn ngữ
+│   ├── DatabaseViewer.tsx  # Main interface
+│   ├── LoginForm.tsx       # Login form
+│   ├── TableList.tsx       # Table list
+│   ├── DataTable.tsx       # Table data display with CRUD
+│   ├── ConnectionInfo.tsx  # Connection information
+│   ├── LanguageSelector.tsx # Language selector
+│   ├── InlineEditCell.tsx  # Inline editing component
+│   └── RowActions.tsx      # Row action buttons
 ├── lib/
-│   ├── store.ts            # Zustand store
-│   └── i18n.ts             # Hệ thống đa ngôn ngữ
+│   ├── store.ts            # Zustand store with CRUD state
+│   └── i18n.ts             # Internationalization system
 └── public/                 # Static files
 ```
 
-## 🎯 Tính năng sắp tới
+## 🎯 Key Features Implemented
 
-- [ ] Kết nối thực tế với database
-- [ ] Query editor
-- [ ] Xuất dữ liệu (CSV, JSON)
-- [ ] Quản lý schema
-- [ ] Backup và restore
+### ✅ Completed Features
+- [x] **Real database connection** - Full support for PostgreSQL, MySQL, Turso
+- [x] **Inline data editing** - Click any cell to edit
+- [x] **CRUD operations** - Create, Read, Update, Delete functionality
+- [x] **Session persistence** - Automatic login and state caching
+- [x] **Responsive design** - Works on desktop and mobile
+- [x] **Multi-language support** - Vietnamese and English
+- [x] **Modern UI** - Dark mode and professional interface
+- [x] **Row management** - Add, edit, delete with confirmations
+- [x] **Data validation** - Type-aware input validation
+
+### 🔄 Advanced Features
+- **Auto-save**: Changes are automatically saved
+- **Keyboard shortcuts**: Enter to save, Escape to cancel
+- **Visual feedback**: Editing states clearly indicated
+- **Error handling**: Graceful error management
+- **Loading states**: Visual feedback during operations
 
 ## 📄 License
 

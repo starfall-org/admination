@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDatabaseStore } from '@/lib/store';
 import { useI18nStore } from '@/lib/i18n';
 import { Database, Loader2 } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const DATABASE_TYPES = [
   { value: 'postgresql', label: 'postgresql', icon: Database },
@@ -35,7 +36,12 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 relative">
+      {/* Theme toggle in top right corner */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      
       <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-gray-700">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
