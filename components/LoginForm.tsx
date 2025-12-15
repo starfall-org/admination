@@ -5,6 +5,7 @@ import { useDatabaseStore } from '@/lib/store';
 import { useI18nStore } from '@/lib/i18n';
 import { Database, Loader2 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import LanguageSelector from '@/components/LanguageSelector';
 
 const DATABASE_TYPES = [
   { value: 'postgresql', label: 'postgresql', icon: Database },
@@ -37,8 +38,9 @@ export default function LoginForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 relative">
-      {/* Theme toggle in top right corner */}
-      <div className="absolute top-4 right-4">
+      {/* Theme and language toggle in top right corner */}
+      <div className="absolute top-4 right-4 flex items-center space-x-2">
+        <LanguageSelector />
         <ThemeToggle />
       </div>
       
