@@ -7,6 +7,8 @@ export interface Translations {
   admination: string;
   
   // Login
+  loginSubtitle: string;
+  databaseUrlPlaceholder: string;
   connectDatabase: string;
   databaseUrl: string;
   databaseType: string;
@@ -140,6 +142,8 @@ interface I18nStore {
 const translations: Record<Language, Translations> = {
   vi: {
     admination: 'admination',
+    loginSubtitle: 'Kết nối và khám phá database của bạn',
+    databaseUrlPlaceholder: 'Nhập database URL của bạn...',
     connectDatabase: 'Kết nối Database',
     databaseUrl: 'Database URL',
     databaseType: 'Loại Database',
@@ -240,6 +244,8 @@ const translations: Record<Language, Translations> = {
   },
   en: {
     admination: 'admination',
+    loginSubtitle: 'Connect and explore your database',
+    databaseUrlPlaceholder: 'Enter your database URL...',
     connectDatabase: 'Connect Database',
     databaseUrl: 'Database URL',
     databaseType: 'Database Type',

@@ -53,7 +53,7 @@ export default function LoginForm() {
             {t('admination')}
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            Kết nối và khám phá database của bạn
+            {t('loginSubtitle')}
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export default function LoginForm() {
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="Nhập database URL của bạn..."
+              placeholder={t('databaseUrlPlaceholder')}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
               required
             />
