@@ -365,7 +365,7 @@ export default function SQLShell({ isOpen, setIsOpen }: SQLShellProps) {
                           )}
                           {Array.isArray(item.result) && item.result.length > 100 && (
                             <div className="text-xs text-gray-500 dark:text-gray-400 mt-3 bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded">
-                              {t('showingResults')} 100 of {item.result.length} rows
+                              {t('showingResults')} 100 {t('ofRows')} {item.result.length} {t('rows')}
                             </div>
                           )}
                         </div>

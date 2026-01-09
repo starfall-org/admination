@@ -130,6 +130,16 @@ export interface Translations {
   queryHistory: string;
   showingResults: string;
   rowsAffected: string;
+  
+  // Table manager
+  currentName: string;
+  newName: string;
+  areYouSure: string;
+  deletePermanently: string;
+  tableWillBePermanently: string;
+  
+  // SQL results
+  ofRows: string;
 }
 
 interface I18nStore {
@@ -240,7 +250,17 @@ const translations: Record<Language, Translations> = {
     error: 'Lỗi',
     queryHistory: 'Lịch sử query',
     showingResults: 'Hiển thị kết quả',
-    rowsAffected: 'dòng bị ảnh hưởng'
+    rowsAffected: 'dòng bị ảnh hưởng',
+    
+    // Table manager
+    currentName: 'Tên bảng (hiện tại)',
+    newName: 'Tên bảng (mới)',
+    areYouSure: 'Bạn có chắc chắn?',
+    deletePermanently: 'Xóa vĩnh viễn',
+    tableWillBePermanently: 'Hành động này sẽ xóa vĩnh viễn bảng',
+    
+    // SQL results
+    ofRows: 'của'
   },
   en: {
     admination: 'admination',
@@ -342,7 +362,17 @@ const translations: Record<Language, Translations> = {
     error: 'Error',
     queryHistory: 'Query History',
     showingResults: 'Showing results',
-    rowsAffected: 'rows affected'
+    rowsAffected: 'rows affected',
+    
+    // Table manager
+    currentName: 'Table Name (current)',
+    newName: 'Table Name (new)',
+    areYouSure: 'Are you sure?',
+    deletePermanently: 'Delete permanently',
+    tableWillBePermanently: 'This action will permanently delete the table',
+    
+    // SQL results
+    ofRows: 'of'
   }
 };
 
