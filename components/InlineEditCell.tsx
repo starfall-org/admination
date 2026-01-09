@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Check, X } from 'lucide-react';
 import { Column } from '@/lib/store';
 import { useI18nStore } from '@/lib/i18n';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 interface InlineEditCellProps {
   value: any;
@@ -12,6 +14,7 @@ interface InlineEditCellProps {
   isEditing: boolean;
   onSave: (value: any) => void;
   onCancel: () => void;
+  wrapText?: boolean;
 }
 
 export default function InlineEditCell({
@@ -20,7 +23,8 @@ export default function InlineEditCell({
   rowIndex,
   isEditing,
   onSave,
-  onCancel
+  onCancel,
+  wrapText = false
 }: InlineEditCellProps) {
   const { t } = useI18nStore();
   const [editValue, setEditValue] = useState(value);
@@ -56,30 +60,34 @@ export default function InlineEditCell({
   if (isEditing) {
     return (
       <div className="relative">
-        <input
+        <Input
           type={getInputType()}
           value={editValue || ''}
           onChange={(e) => setEditValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
-          className="w-full px-2 py-1 text-sm border border-blue-500 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+          className="h-8 text-sm"
           autoFocus
         />
-        <div className="absolute -bottom-6 left-0 flex space-x-1">
-          <button
+        <div className="absolute -bottom-8 left-0 flex gap-1 z-10">
+          <Button
             onClick={handleSave}
-            className="px-1 py-0.5 text-xs bg-green-500 text-white rounded hover:bg-green-600 flex items-center"
+            size="sm"
+            variant="default"
+            className="h-6 px-2"
             title={t('save')}
           >
             <Check size={12} />
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={onCancel}
-            className="px-1 py-0.5 text-xs bg-red-500 text-white rounded hover:bg-red-600 flex items-center"
+            size="sm"
+            variant="destructive"
+            className="h-6 px-2"
             title={t('cancel')}
           >
             <X size={12} />
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -87,13 +95,13 @@ export default function InlineEditCell({
 
   return (
     <div
-      className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 p-1 rounded transition-colors duration-150"
-      title={t('clickToEdit')}
+      className={`cursor-pointer hover:bg-accent p-1.5 rounded transition-colors ${!wrapText ? 'truncate' : 'whitespace-normal break-words'}`}
+      title={!wrapText ? String(value) : t('clickToEdit')}
     >
       {value === null || value === undefined || value === '' ? (
-        <span className="text-gray-400 italic">{t('nullValue')}</span>
+        <span className="text-muted-foreground italic text-sm">{t('nullValue')}</span>
       ) : (
-        <span className="text-sm text-gray-900 dark:text-gray-100">
+        <span className={`text-sm ${!wrapText ? 'block truncate' : ''}`}>
           {String(value)}
         </span>
       )}

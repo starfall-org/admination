@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Save, X, Edit, Trash2 } from 'lucide-react';
 import { useDatabaseStore } from '@/lib/store';
 import { useI18nStore } from '@/lib/i18n';
+import { Button } from '@/components/ui/button';
 
 interface RowActionsProps {
   rowIndex: number;
@@ -37,66 +38,78 @@ export default function RowActions({ rowIndex, isEditing, isNew = false }: RowAc
 
   if (showDeleteConfirm) {
     return (
-      <div className="flex items-center space-x-1">
-        <button
+      <div className="flex items-center gap-1">
+        <Button
           onClick={handleDelete}
-          className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 flex items-center"
+          size="sm"
+          variant="destructive"
+          className="h-7 text-xs gap-1"
         >
-          <Trash2 size={12} className="mr-1" />
+          <Trash2 size={12} />
           {t('deleteConfirm')}
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => setShowDeleteConfirm(false)}
-          className="px-2 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600"
+          size="sm"
+          variant="outline"
+          className="h-7 text-xs"
         >
           {t('deleteCancel')}
-        </button>
+        </Button>
       </div>
     );
   }
 
   if (isCurrentlyEditing) {
     return (
-      <div className="flex items-center space-x-1">
-        <button
+      <div className="flex items-center gap-1">
+        <Button
           onClick={handleSave}
-          className="px-2 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600 flex items-center"
+          size="sm"
+          variant="default"
+          className="h-7 text-xs gap-1"
           title={t('save')}
         >
-          <Save size={12} className="mr-1" />
+          <Save size={12} />
           {t('save')}
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={handleCancel}
-          className="px-2 py-1 text-xs bg-yellow-500 text-white rounded hover:bg-yellow-600 flex items-center"
+          size="sm"
+          variant="outline"
+          className="h-7 text-xs gap-1"
           title={t('cancel')}
         >
-          <X size={12} className="mr-1" />
+          <X size={12} />
           {t('cancel')}
-        </button>
+        </Button>
       </div>
     );
   }
 
   return (
-    <div className="flex items-center space-x-1">
-      <button
+    <div className="flex items-center gap-1">
+      <Button
         onClick={handleEdit}
-        className="px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center"
+        size="sm"
+        variant="outline"
+        className="h-7 text-xs gap-1"
         title={t('edit')}
       >
-        <Edit size={12} className="mr-1" />
+        <Edit size={12} />
         {t('edit')}
-      </button>
+      </Button>
       {!isNew && (
-        <button
+        <Button
           onClick={() => setShowDeleteConfirm(true)}
-          className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 flex items-center"
+          size="sm"
+          variant="destructive"
+          className="h-7 text-xs gap-1"
           title={t('delete')}
         >
-          <Trash2 size={12} className="mr-1" />
+          <Trash2 size={12} />
           {t('delete')}
-        </button>
+        </Button>
       )}
     </div>
   );

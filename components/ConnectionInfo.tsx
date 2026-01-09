@@ -3,6 +3,9 @@
 import { useDatabaseStore } from '@/lib/store';
 import { useI18nStore } from '@/lib/i18n';
 import { Database, LogOut } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 export default function ConnectionInfo() {
   const { connection, disconnect } = useDatabaseStore();
@@ -10,18 +13,8 @@ export default function ConnectionInfo() {
 
   if (!connection) return null;
 
-  const getDatabaseIcon = () => {
-    return Database;
-  };
-
   const getDatabaseName = (type: 'postgresql' | 'mysql' | 'turso') => {
     return t(type);
-  };
-
-  const getConnectionStatusColor = () => {
-    return connection.connected 
-      ? 'text-green-600 dark:text-green-400' 
-      : 'text-red-600 dark:text-red-400';
   };
 
   const maskUrl = (url: string) => {
@@ -34,43 +27,41 @@ export default function ConnectionInfo() {
     }
   };
 
-  const IconComponent = getDatabaseIcon();
-
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center gap-3">
       {/* Connection Status */}
-      <div className="flex items-center space-x-2">
-        <div className="flex items-center space-x-2">
-          <IconComponent className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-          <div className="text-sm">
-            <div className="font-medium text-gray-900 dark:text-white">
-              {getDatabaseName(connection.type)}
-            </div>
-            <div className="text-gray-500 dark:text-gray-400">
-              {maskUrl(connection.url)}
-            </div>
+      <div className="flex items-center gap-2">
+        <Database className="w-4 h-4 text-muted-foreground" />
+        <div className="text-sm">
+          <div className="font-medium">
+            {getDatabaseName(connection.type)}
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {maskUrl(connection.url)}
           </div>
         </div>
       </div>
 
-      {/* Status Indicator */}
-      <div className="flex items-center space-x-2">
-        <div className={`w-2 h-2 rounded-full ${
-          connection.connected ? 'bg-green-500' : 'bg-red-500'
+      <Separator orientation="vertical" className="h-8" />
+
+      {/* Status Badge */}
+      <Badge variant={connection.connected ? "default" : "destructive"} className="gap-1.5">
+        <div className={`w-1.5 h-1.5 rounded-full ${
+          connection.connected ? 'bg-green-400' : 'bg-red-400'
         }`}></div>
-        <span className={`text-sm font-medium ${getConnectionStatusColor()}`}>
-          {connection.connected ? t('connected') : 'Disconnected'}
-        </span>
-      </div>
+        {connection.connected ? t('connected') : 'Disconnected'}
+      </Badge>
 
       {/* Disconnect Button */}
-      <button
+      <Button
         onClick={disconnect}
-        className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors duration-200"
+        variant="outline"
+        size="sm"
+        className="gap-2"
       >
         <LogOut className="w-4 h-4" />
-        <span>{t('disconnect')}</span>
-      </button>
+        <span className="hidden sm:inline">{t('disconnect')}</span>
+      </Button>
     </div>
   );
 }
