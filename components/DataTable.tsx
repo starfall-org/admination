@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BarChart3, Plus, Download, RefreshCw, FileText, WrapText } from 'lucide-react';
 import { Table as TableType } from '@/lib/store';
 import { useI18nStore } from '@/lib/i18n';
@@ -20,9 +20,21 @@ interface DataTableProps {
 
 export default function DataTable({ table }: DataTableProps) {
   const { t } = useI18nStore();
-  const { editingRows, addNewRow, updateEditingValue, saveEditing, cancelEditing } = useDatabaseStore();
+  const { connection, editingRows, addNewRow, updateEditingValue, saveEditing, cancelEditing, loadTableData } = useDatabaseStore();
   const [showAddForm, setShowAddForm] = useState(false);
   const [wrapText, setWrapText] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState(false);
+
+  const handleRefresh = () => {
+    loadTableData(table.name);
+  };
+
+  useEffect(() => {
+    // Load table data when table is selected
+    if (table && connection && table.rows.length === 0) {
+      loadTableData(table.name);
+    }
+  }, [table.name, connection, table.rows.length]);
 
   if (!table.columns || table.columns.length === 0) {
     return (
@@ -105,7 +117,7 @@ export default function DataTable({ table }: DataTableProps) {
               <Download size={16} />
               {t('exportCsv')}
             </Button>
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2" onClick={handleRefresh}>
               <RefreshCw size={16} />
               {t('refresh')}
             </Button>

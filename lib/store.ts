@@ -72,6 +72,7 @@ interface DatabaseStore {
   connect: (url: string, type: DatabaseConnection['type']) => Promise<void>;
   disconnect: () => void;
   loadTables: () => Promise<void>;
+  loadTableData: (tableName: string) => Promise<void>;
   
   // Editing actions
   setEditMode: (enabled: boolean) => void;
@@ -268,6 +269,50 @@ export const useDatabaseStore = create<DatabaseStore>((set, get) => ({
       
       set({ tables, isLoading: false });
       setStoredTables(tables);
+    } catch (error) {
+      set({
+        error: error instanceof Error ? error.message : getErrorMessage('loadTablesFailed', 'Không thể tải dữ liệu bảng'),
+        isLoading: false
+      });
+    }
+  },
+  
+  loadTableData: async (tableName: string) => {
+    const { connection, tables } = get();
+    if (!connection) return;
+    
+    const tableIndex = tables.findIndex(t => t.name === tableName);
+    if (tableIndex === -1) return;
+    
+    set({ isLoading: true, error: null });
+    
+    try {
+      const response = await fetch('/api/tables/data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          url: connection.url, 
+          type: connection.type,
+          tableName
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to load table data');
+      }
+
+      const newTables = [...tables];
+      newTables[tableIndex] = {
+        ...newTables[tableIndex],
+        rows: result.data || []
+      };
+      
+      set({ tables: newTables, isLoading: false });
+      setStoredTables(newTables);
     } catch (error) {
       set({
         error: error instanceof Error ? error.message : getErrorMessage('loadTablesFailed', 'Không thể tải dữ liệu bảng'),
